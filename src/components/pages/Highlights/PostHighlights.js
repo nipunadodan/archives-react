@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Button from "../../../template/common/Button";
+import Button from "../../template/common/Button";
 import {Link, withRouter} from "react-router-dom";
 
 class PostHighlights extends Component{
@@ -13,6 +13,7 @@ class PostHighlights extends Component{
     }
 
     componentDidMount() {
+        const api_base = process.env.REACT_APP_API_BASE;
         const option = this.props.match.params.option;
         const data = {
             count:(option === 'all' ? 0 : option)
@@ -21,7 +22,7 @@ class PostHighlights extends Component{
         // eslint-disable-next-line no-unused-expressions
         option ? window.scrollTo(0, 0) : null;
 
-        fetch('https://archives.edu.lk/ajax.php?process=articles-featured-process',{
+        fetch(api_base+'articles-featured-process',{
             method:'post',
             body:JSON.stringify(data)
         })

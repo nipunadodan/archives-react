@@ -1,13 +1,13 @@
 import React from 'react';
 
 import './Home.css';
-import Header from "../../template/Header";
-import Footer from "../../template/Footer/Footer";
+import Header from "../../template/header/Header";
+import Footer from "../../template/footer/Footer";
 import Hero from "./Hero";
 import Advert from "./Advert";
-import PostHighlights from "./Highlights/PostHighlights";
+import PostHighlights from "../Highlights/PostHighlights";
 import AdvertSecond from "./AdvertSecond";
-import BlogPosts from "./Blog/BlogPosts";
+import BlogPosts from "../Blog/BlogPosts";
 
 function Home() {
     window.scrollTo(0, 0)

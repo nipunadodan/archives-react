@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Button from "../../../template/common/Button";
+import Button from "../../template/common/Button";
 import BlogDate from "./BlogDate";
 
 class BlogPosts extends Component{
@@ -12,7 +12,8 @@ class BlogPosts extends Component{
         }
     }
     componentDidMount() {
-        fetch('https://archives.edu.lk/blog/wp-json/wp/v2/posts?per_page=3')
+        const blog_api_base = process.env.REACT_APP_BLOG_API_BASE;
+        fetch(blog_api_base+'posts?per_page=3')
             .then(res => res.json())
             .then(
                 (result) => {

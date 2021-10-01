@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
-import Header from "../../template/Header";
-import Footer from "../../template/Footer/Footer";
+import Header from "../../template/header/Header";
+import Footer from "../../template/footer/Footer";
 import ArticleHeader from "./ArticleHeader";
 import ArticleMeta from "./ArticleMeta";
 import ArticleLinks from "./ArticleLinks";
@@ -17,7 +17,7 @@ class Article extends Component{
         }
     }
     componentDidMount() {
-        const api_base = process.env.REACT_APP_API_BASE;
+        const api_base = process.env.ARCHIVES_API_BASE;
         const option = this.props.match.params.id;
         const id = this.props.id;
         const data = {

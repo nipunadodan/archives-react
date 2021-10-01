@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getDateStr} from "../../../../Helpers/Helpers";
+import {getDateStr} from "../../../Helpers/Helpers";
 
 class BlogDate extends Component{
 
