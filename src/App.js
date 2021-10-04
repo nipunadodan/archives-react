@@ -1,15 +1,23 @@
 import React, {Component} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./components/pages/home/Home";
-import Article from "./components/pages/article/Article";
+import Article from "./components/pages/Article/Article";
 import Highlights from "./components/pages/Highlights/Highlights";
 import BlogPosts from "./components/pages/Blog/BlogPosts";
-import Login from "./components/pages/login/Login";
+import Login from "./components/pages/Login/Login";
+import PrintArticle from "./components/pages/Print/PrintArticle";
 
 class App extends Component{
     state = {
         token : false
     }
+
+    handleTokenCallback = (tokenData) => {
+        this.setState({
+            token: tokenData
+        })
+    }
+
     componentDidMount() {
         if(localStorage.getItem('login') !== null){
             this.setState({
@@ -21,7 +29,7 @@ class App extends Component{
     render() {
         if(!this.state.token) {
             return <Router basename={'archives'}>
-                <Login />
+                <Login tokenCallback={this.handleTokenCallback} />
             </Router>
         }
         return(
@@ -32,6 +40,9 @@ class App extends Component{
                     </Route>
                     <Route exact path="/article/:id">
                         <Article />
+                    </Route>
+                    <Route exact path="/print/:id">
+                        <PrintArticle />
                     </Route>
                     <Route exact path="/articles/:option">
                         <Highlights />

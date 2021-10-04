@@ -6,10 +6,11 @@ class Button extends Component{
         const outline = this.props.outline;
         const text = this.props.text;
         const size = this.props.size;
+        const customClass = this.props.customClass;
 
         return (
             <button type={type} className={[
-                'rounded-full cursor-pointer border bg-white duration-300 px-6 md:px-6 inline-block border-archives',
+                'rounded-full cursor-pointer border bg-white duration-300 px-10 md:px-10 inline-block border-archives',
                 outline ?
                     'text-archives hover:text-white hover:bg-archives border-archives hover:border-white' :
                     'text-white bg-archives hover:bg-archives-dark hover:border-archives',

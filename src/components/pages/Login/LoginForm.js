@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from "react-router-dom";
+import Button from "../../template/common/Button";
 
 class LoginForm extends Component{
     constructor(props) {
@@ -22,7 +23,6 @@ class LoginForm extends Component{
     }
 
     handleSubmit = (event) =>{
-
         const api_base = process.env.REACT_APP_API_BASE;
         fetch(api_base+'login-process',{
             method:'post',
@@ -36,6 +36,7 @@ class LoginForm extends Component{
                 (result) => {
                     if(result.status === 'success') {
                         localStorage.setItem('login', true)
+
                         this.setState({
                             login:true
                         })
@@ -45,6 +46,7 @@ class LoginForm extends Component{
                             login:false
                         })
                     }
+                    this.props.parentCallback(result);
                 }
             )
         event.preventDefault();
@@ -52,23 +54,22 @@ class LoginForm extends Component{
 
     render() {
         if(this.state.login){
-            const path = this.props.location
-            return <Redirect to={'/'} />
+            //return <Redirect to={'/'} />
+            //window.location.reload()
         }
         return(
-            <div className="login-wrapper">
-                <h1>Please Log In</h1>
+            <div className="login-wrapper bg-white rounded-2xl px-8 md:px-16 py-20 mt-6">
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        <p>Username</p>
-                        <input type="text" name={'username'} onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        <p>Password</p>
-                        <input type="password" name={'password'} onChange={this.handleChange} />
-                    </label>
-                    <div>
-                        <button type="submit">Submit</button>
+                    <div className={'my-3'}>
+                        <label className={'text-sm mb-1 inline-block'}>Username</label>
+                        <input type="text" className={'p-2 rounded-lg w-full border-2 focus:border-archives hover:border-gray-400 outline-none'} placeholder={'Username'} name={'username'} onChange={this.handleChange} autoComplete={'off'} />
+                    </div>
+                    <div className={'my-3'}>
+                        <label className={'text-sm mb-1 inline-block'}>Password</label>
+                        <input type="password" className={'p-2 rounded-lg w-full border-2 focus:border-archives hover:border-gray-400 outline-none'} placeholder={'Password'} name={'password'} onChange={this.handleChange} />
+                    </div>
+                    <div className={'flex justify-end mt-6'}>
+                        <Button type={'submit'} outline={false} text={'Login'} size={'sm'} className={'px-6'} />
                     </div>
                 </form>
             </div>

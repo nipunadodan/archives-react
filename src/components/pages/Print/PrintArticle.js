@@ -2,12 +2,12 @@ import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import Header from "../../template/header/Header";
 import Footer from "../../template/footer/Footer";
-import ArticleHeader from "./ArticleHeader";
-import ArticleMeta from "./ArticleMeta";
-import ArticleLinks from "./ArticleLinks";
-import ArticleAbstract from "./ArticleAbstract";
+import ArticleHeader from "../Article/ArticleHeader";
+import ArticleMeta from "../Article/ArticleMeta";
+import ArticleLinks from "../Article/ArticleLinks";
+import ArticleAbstract from "../Article/ArticleAbstract";
 
-class Article extends Component{
+class PrintArticle extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,7 @@ class Article extends Component{
         }
     }
     componentDidMount() {
-        const api_base = process.env.ARCHIVES_API_BASE;
+        const api_base = process.env.REACT_APP_API_BASE;
         const option = this.props.match.params.id;
         const id = this.props.id;
         const data = {
@@ -45,9 +45,9 @@ class Article extends Component{
         return (
             <div key={'articleContainer'} className={'container mx-auto'}>
                 <Header />
-                    {error
-                        ? <div key={'error'} className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-12 md:mt-6'}>Error: {error.message}</div>
-                        : [(!isLoaded
+                {error
+                    ? <div key={'error'} className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-12 md:mt-6'}>Error: {error.message}</div>
+                    : [(!isLoaded
                             ? <div key={'loading'} className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-12 md:mt-6'}>Loading...</div>
                             : [
                                 <>
@@ -57,12 +57,12 @@ class Article extends Component{
                                     <ArticleAbstract article={article}/>
                                 </>
                             ]
-                        )]
-                    }
+                    )]
+                }
                 <Footer />
             </div>
         )
     }
 }
 
-export default withRouter(Article)
+export default withRouter(PrintArticle)

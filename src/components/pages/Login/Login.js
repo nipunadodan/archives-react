@@ -4,11 +4,14 @@ import LoginForm from "./LoginForm";
 import Footer from "../../template/footer/Footer";
 
 class Login extends Component{
+    handleCallback = (childData) => {
+        this.props.tokenCallback(childData)
+    }
     render() {
         return(
-            <div className={'container mx-auto'}>
+            <div className={'md:w-2/5 mx-auto'}>
                 <Header />
-                <LoginForm />
+                <LoginForm parentCallback={this.handleCallback} />
             </div>
         )
     }
