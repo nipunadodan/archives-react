@@ -10,7 +10,7 @@ class ArticleLinks extends Component{
                 <a className={'inline-block mr-3 mb-3 md:mb-0'} target={'_blank'} rel={'noreferrer'} href={article.full_text_link}>
                     <Button type={'button'} outline={false} text={'Full text link'} size={'sm'} />
                 </a>
-                <Link to={'/print/'+article.slug}>
+                <Link to={'/print/'+article.slug} target={'_blank'} rel={'noreferrer'}>
                     <Button type={'button'} outline={true} text={'Plain Text Link'} size={'sm'} />
                 </Link>
             </div>

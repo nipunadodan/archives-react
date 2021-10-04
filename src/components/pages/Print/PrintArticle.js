@@ -1,11 +1,7 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
-import Header from "../../template/header/Header";
-import Footer from "../../template/footer/Footer";
-import ArticleHeader from "../Article/ArticleHeader";
-import ArticleMeta from "../Article/ArticleMeta";
-import ArticleLinks from "../Article/ArticleLinks";
-import ArticleAbstract from "../Article/ArticleAbstract";
+import './PlainText.css'
+import PlainText from "./PlainText";
 
 class PrintArticle extends Component{
     constructor(props) {
@@ -43,23 +39,18 @@ class PrintArticle extends Component{
     render() {
         const {error, isLoaded, article} = this.state;
         return (
-            <div key={'articleContainer'} className={'container mx-auto'}>
-                <Header />
+            <div key={'articleContainer'} className={'bg-white'}>
                 {error
                     ? <div key={'error'} className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-12 md:mt-6'}>Error: {error.message}</div>
                     : [(!isLoaded
-                            ? <div key={'loading'} className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-12 md:mt-6'}>Loading...</div>
+                            ? <div key={'loading'} className={'container mx-auto md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-12 md:mt-6'}>Loading...</div>
                             : [
                                 <>
-                                    <ArticleHeader article={article}/>
-                                    <ArticleMeta article={article}/>
-                                    <ArticleLinks article={article}/>
-                                    <ArticleAbstract article={article}/>
+                                    <PlainText article={article}/>
                                 </>
                             ]
                     )]
                 }
-                <Footer />
             </div>
         )
     }
