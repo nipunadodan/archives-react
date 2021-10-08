@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Header from "../../template/header/Header";
 import LoginForm from "./LoginForm";
-import Footer from "../../template/footer/Footer";
 
 class Login extends Component{
     handleCallback = (childData) => {

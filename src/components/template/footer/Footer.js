@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Button from "../common/Button";
 import './footer.css';
+import {Link} from "react-router-dom";
 
 class Footer extends Component{
     render() {
@@ -15,7 +16,9 @@ class Footer extends Component{
                         <li className={'mb-6 md:mb-0'}>Has it published on a  journal that is  non-predatory, peer reviewed journal?</li>
                     </ul>
                     <div className={"flex md:justify-center items-center"}>
-                        <Button type={"button"} outline={true} text={"Add your publication"} />
+                        <Link to="/add-new">
+                            <Button type={"button"} outline={true} text={"Add your publication"} />
+                        </Link>
                     </div>
                 </div>
                 <p>FIND US HERE<span className={'ml-3'}>—</span> <i className="fab fa-facebook-square ml-3 mr-3 text-2xl"></i> <i className="fab fa-twitter-square mr-3 text-2xl"></i> <i className="fab fa-linkedin mr-3 text-2xl"></i> </p>

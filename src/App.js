@@ -6,6 +6,7 @@ import Highlights from "./components/pages/Highlights/Highlights";
 import BlogPosts from "./components/pages/Blog/BlogPosts";
 import Login from "./components/pages/Login/Login";
 import PrintArticle from "./components/pages/Print/PrintArticle";
+import ArticleAdd from "./components/pages/Dashboard/ArticleAdd/ArticleAdd";
 
 class App extends Component{
     state = {
@@ -49,6 +50,9 @@ class App extends Component{
                     </Route>
                     <Route exact path="/posts">
                         <BlogPosts />
+                    </Route>
+                    <Route exact path="/add-new">
+                        <ArticleAdd />
                     </Route>
                 </Switch>
             </Router>

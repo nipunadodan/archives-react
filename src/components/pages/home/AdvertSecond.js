@@ -12,7 +12,7 @@ class AdvertSecond extends Component{
                     <li className={'font-medium text-white mb-6 md:mb-2'}>Has it published on a  journal that is  non-predatory, peer reviewed journal?</li>
                 </ul>
                 <div className={'flex justify-center items-center mt-6 md:mt-0'}>
-                    <Link to="/posts">
+                    <Link to="/add-new">
                         <Button type={'button'} outline={true} text={'Add your publication'} />
                     </Link>
                 </div>

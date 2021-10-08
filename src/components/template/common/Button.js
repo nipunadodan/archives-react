@@ -6,7 +6,7 @@ class Button extends Component{
         const outline = this.props.outline;
         const text = this.props.text;
         const size = this.props.size;
-        const customClass = this.props.customClass;
+        const icon = this.props.icon;
 
         return (
             <button type={type} className={[
@@ -17,7 +17,7 @@ class Button extends Component{
                 size === 'sm' ?
                     'py-2' :
                     'py-3'
-            ].join(' ')}>{text}</button>
+            ].join(' ')}>{icon ? <i className={'mr-2 la la-'+icon}></i> : '' }{text}</button>
 
         )
     }

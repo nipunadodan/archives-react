@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Button from "../../template/common/Button";
 import hero from './search_hero.png'
+import {Link} from "react-router-dom";
 
 class Hero extends Component{
     render() {
@@ -9,7 +10,9 @@ class Hero extends Component{
                 <div className={'flex items-center flex-wrap'}>
                     <h2 className={'text-4xl md:text-6xl font-black'}>You can get yours indexed too</h2>
                     <p className={'my-10'}>ARCHIVES.EDU.LK is a free Sri Lankan research article archiving and indexing space which enhance the visibility and impact of the Sri Lankan research output.</p>
-                    <Button type={'button'} outline={false} text={'Add your publication'} />
+                    <Link to="/add-new">
+                        <Button type={'button'} outline={false} text={'Add your publication'} />
+                    </Link>
                 </div>
                 <div className={'flex items-center flex-wrap'}>
                     <img src={hero} className={'mx-auto'} alt={'Woman searching web'} />
