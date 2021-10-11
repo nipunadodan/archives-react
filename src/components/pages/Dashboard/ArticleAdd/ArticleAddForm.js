@@ -9,7 +9,8 @@ class ArticleAddForm extends Component{
         basic : [],
         abstract : null,
         more : [],
-        abstractObject:null
+        abstractObject:null,
+        submitSuccess:false
     }
 
     handleBasicData = (data) =>{
@@ -33,6 +34,12 @@ class ArticleAddForm extends Component{
     handleSubmit = (data) =>{
         data.preventDefault();
         const {basics, abstract, more} = this.state
+        if(Array.isArray(basics.authors)){
+            basics.authors =  basics.authors.join()
+        }
+        if(Array.isArray(more.keywords)) {
+            more.keywords = more.keywords.join();
+        }
         // Merging arrays
         let finalState = {
             ...basics,
@@ -40,6 +47,30 @@ class ArticleAddForm extends Component{
             ...more
         };
         console.log(finalState);
+
+        let api_base = '';
+        if (process.env.NODE_ENV === 'production') {
+            api_base = process.env.REACT_APP_API_BASE;
+        }else{
+            api_base = process.env.REACT_APP_API_BASE_LOCAL;
+        }
+
+        fetch(api_base+'article-add',{
+            method:'post',
+            body:new URLSearchParams(finalState),
+            credentials: "include"
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    if(result.status === 'success') {
+                        this.setState({
+                            submitSuccess:true
+                        })
+                    }
+                }
+            )
 
         return false;
     }

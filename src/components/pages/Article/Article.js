@@ -27,7 +27,7 @@ class Article extends Component{
         // eslint-disable-next-line no-unused-expressions
         option ? window.scrollTo(0, 0) : null;
 
-        fetch(api_base+'article-got-process',{
+        fetch(api_base+'article-got',{
             method:'post',
             body:JSON.stringify(data)
         })
