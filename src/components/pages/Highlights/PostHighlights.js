@@ -13,7 +13,12 @@ class PostHighlights extends Component{
     }
 
     componentDidMount() {
-        const api_base = process.env.REACT_APP_API_BASE;
+        let api_base = '';
+        if (process.env.NODE_ENV === 'production') {
+            api_base = process.env.REACT_APP_API_BASE;
+        }else{
+            api_base = process.env.REACT_APP_API_BASE_LOCAL;
+        }
         const option = this.props.match.params.option;
         const data = {
             count:(option === 'all' ? 0 : option)
@@ -23,9 +28,9 @@ class PostHighlights extends Component{
         option ? window.scrollTo(0, 0) : null;
 
         fetch(api_base+'articles-featured',{
-            method:'post',
-            body:JSON.stringify(data)
-        })
+                method:'post',
+                body:JSON.stringify(data)
+            })
             .then(res => res.json())
             .then(
                 (result) => {

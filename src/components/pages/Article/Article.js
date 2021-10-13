@@ -17,7 +17,12 @@ class Article extends Component{
         }
     }
     componentDidMount() {
-        const api_base = process.env.REACT_APP_API_BASE;
+        let api_base = '';
+        if (process.env.NODE_ENV === 'production') {
+            api_base = process.env.REACT_APP_API_BASE;
+        }else{
+            api_base = process.env.REACT_APP_API_BASE_LOCAL;
+        }
         const option = this.props.match.params.id;
         const id = this.props.id;
         const data = {
@@ -28,16 +33,24 @@ class Article extends Component{
         option ? window.scrollTo(0, 0) : null;
 
         fetch(api_base+'article-got',{
-            method:'post',
-            body:JSON.stringify(data)
-        })
-            .then(res => res.json())
-            .then((result) =>{
-                this.setState({
-                    isLoaded: true,
-                    article:result
-                })
+                method:'post',
+                body:JSON.stringify(data)
             })
+            .then(res => res.json())
+            .then(
+                (result) =>{
+                    this.setState({
+                        isLoaded: true,
+                        article:result
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
     }
 
     render() {

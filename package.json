@@ -30,7 +30,7 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
-    "start": "HTTPS=true craco start",
+    "start": "craco start",
     "build": "HTTPS=true craco build",
     "test": "craco test",
     "eject": "react-scripts eject"

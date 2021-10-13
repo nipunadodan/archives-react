@@ -4,7 +4,7 @@ import ArticleAddAbstract from "../Article/ArticleAddAbstract";
 import ArticleAddMoreInfo from "../Article/ArticleAddMoreInfo";
 import ArticleAddSubmit from "../Article/ArticleAddSubmit";
 
-class ArticleAddForm extends Component{
+class ArticleEditForm extends Component{
     state = {
         basic : [],
         abstract : null,
@@ -98,4 +98,4 @@ class ArticleAddForm extends Component{
     }
 }
 
-export default ArticleAddForm
+export default ArticleEditForm
