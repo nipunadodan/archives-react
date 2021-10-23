@@ -8,14 +8,38 @@ class ArticleAddAbstract extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            abstract: 'content',
+            values: {
+                abstract:'content'
+            },
         }
     }
 
     updateContent = (value) => {
-        this.setState({abstract:value})
-        this.props.parentCallback({abstract:value});
+        this.setState({
+            values:{
+                abstract:value
+            }
+        },function () {
+            this.props.parentCallback(this.state.values);
+        })
     }
+
+    componentDidMount() {
+        if(this.props.article) {
+            const article = this.props.article.data
+            this.setState({
+                joseph:{
+                    abstract: article.abstract
+                },
+                values:{
+                    abstract: article.abstract
+                },
+            }, function () {
+                this.props.parentCallback(this.state.values);
+            })
+        }
+    }
+
     /*
      * @property Jodit jodit instance of native Jodit
      */
@@ -31,9 +55,10 @@ class ArticleAddAbstract extends Component {
                 <h3 className={'font-black text-4xl mb-6'}>Abstract</h3>
                 <JoditEditor
                     editorRef={this.setRef}
-                    value={this.state.content}
+                    value={this.state.values.abstract}
                     config={this.config}
-                    onChange={this.updateContent}
+                    onBlur={newContent => this.updateContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                    onChange={newContent => {}}
                 />
             </div>
         );

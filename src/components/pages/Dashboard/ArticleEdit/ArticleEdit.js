@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import Header from "../../../template/header/Header";
-import ArticleAddIntructions from "../ArticleAdd/ArticleAddIntructions";
 import Footer from "../../../template/footer/Footer";
 import ArticleEditIntructions from "./ArticleEditIntructions";
 import ArticleEditForm from "./ArticleEditForm";

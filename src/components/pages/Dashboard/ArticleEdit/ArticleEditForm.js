@@ -3,13 +3,17 @@ import ArticleAddBasicInfo from "../Article/ArticleAddBasicInfo";
 import ArticleAddAbstract from "../Article/ArticleAddAbstract";
 import ArticleAddMoreInfo from "../Article/ArticleAddMoreInfo";
 import ArticleAddSubmit from "../Article/ArticleAddSubmit";
+import {withRouter} from "react-router-dom";
 
 class ArticleEditForm extends Component{
     state = {
-        basic : [],
+        basics : [],
         abstract : null,
         more : [],
         abstractObject:null,
+        isLoaded: false,
+        article:false,
+        subject_areas:[],
         submitSuccess:false,
         error : null
     }
@@ -35,6 +39,9 @@ class ArticleEditForm extends Component{
     handleSubmit = (data) =>{
         data.preventDefault();
         const {basics, abstract, more} = this.state
+
+//console.log(this.state)
+
         if(Array.isArray(basics.authors)){
             basics.authors =  basics.authors.join()
         }
@@ -56,7 +63,7 @@ class ArticleEditForm extends Component{
             api_base = process.env.REACT_APP_API_BASE_LOCAL;
         }
 
-        fetch(api_base+'article-add',{
+        /*fetch(api_base+'article-add',{
             method:'post',
             body:new URLSearchParams(finalState),
             credentials: "include"
@@ -77,25 +84,79 @@ class ArticleEditForm extends Component{
                         error
                     })
                 }
-            )
+            )*/
 
         return false;
     }
 
     componentDidMount() {
         window.scrollTo(0, 0)
+
+        let api_base = '';
+        if (process.env.NODE_ENV === 'production') {
+            api_base = process.env.REACT_APP_API_BASE;
+        }else{
+            api_base = process.env.REACT_APP_API_BASE_LOCAL;
+        }
+        const option = this.props.match.params.id;
+        const id = this.props.id;
+        const data = {
+            id: (option ? option : id)
+        }
+
+        fetch(api_base+'article-got',{
+            method:'post',
+            body:JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(
+                (result) =>{
+                    this.setState({
+                        isLoaded: true,
+                        article:result
+                    })
+                    if(result.status !== 'success'){
+                        this.setState({
+                            error:{
+                                message:result.error
+                            }
+                        })
+                    }
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
     }
 
     render() {
+        const {error, isLoaded, article} = this.state;
+        if(error){
+            return (
+                <div className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-14 mt-6'}>
+                    Error: {error.message}
+                </div>
+            )
+        }
+        if(!isLoaded){
+            return (
+                <div className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-14 mt-6'}>
+                    Loading...
+                </div>
+            )
+        }
         return(
             <form className={'form'} name={'article-add'} method={'post'} onSubmit={this.handleSubmit}>
-                <ArticleAddBasicInfo parentCallback={this.handleBasicData} />
-                <ArticleAddAbstract parentCallback={this.handleAbstractData} />
-                <ArticleAddMoreInfo parentCallback={this.handleMoreData} />
+                <ArticleAddBasicInfo article={article} parentCallback={this.handleBasicData} />
+                <ArticleAddAbstract article={article} parentCallback={this.handleAbstractData} />
+                <ArticleAddMoreInfo article={article} parentCallback={this.handleMoreData} />
                 <ArticleAddSubmit />
             </form>
         )
     }
 }
 
-export default ArticleEditForm
+export default withRouter(ArticleEditForm)

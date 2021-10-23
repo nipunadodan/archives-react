@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Button from "../../../template/common/Button";
 
 class ArticleAddMoreInfo extends Component {
     state = {
@@ -8,8 +7,6 @@ class ArticleAddMoreInfo extends Component {
             {keyword:''}
         ]
     }
-
-    //TODO: Add input on click (keywords). Keep existing values on state and reassign them on newly loop-created elements. Is this a good idea? Not.
 
     handleChange = (event) =>{
         let currstate = this.state.values;
@@ -57,11 +54,11 @@ class ArticleAddMoreInfo extends Component {
                 <div className={'md:grid md:grid-cols-4 gap-6 mb-6'}>
                     <div key={'pub_year'}>
                         <label>Publication Year</label>
-                        <input type="text" pattern={'^(19|20)\\d{2}$'} placeholder={'Publication Year'} name={'publication_year'} onChange={this.handleChange} autoComplete={'off'} required />
+                        <input type="text" pattern={'^(19|20)\\d{2}$'} placeholder={'Publication Year'} name={'publication_year'} onChange={this.handleChange} autoComplete={'off'}  />
                     </div>
                     <div key={'pub_date'}>
                         <label>Publication Date</label>
-                        <input type="date" placeholder={'Publication Date'} name={'publication_date'} onChange={this.handleChange} autoComplete={'off'} required />
+                        <input type="date" placeholder={'Publication Date'} name={'publication_date'} onChange={this.handleChange} autoComplete={'off'}  />
                     </div>
                     <div key={'volume'}>
                         <label>Volume</label>
@@ -78,7 +75,7 @@ class ArticleAddMoreInfo extends Component {
                         const required = i === 0
                         return (
                             <span key={i}>
-                                <input type="text" key={'keyword-'+i} className={'w-auto mb-3'} placeholder={'Keyword '+(i+1)} name={'keyword'} value={x.keyword} onChange={e => this.handleKeywordsChange(e,i)} autoComplete={'off'} required={required} />
+                                <input type="text" key={'keyword-'+i} className={'w-auto mb-3'} placeholder={'Keyword '+(i+1)} name={'keyword'} value={x.keyword} onChange={e => this.handleKeywordsChange(e,i)} autoComplete={'off'}  />
                                 <span className={''}>
                                     {this.state.keywords.length !== 1 && <button type={'button'} className={'rounded-full cursor-pointer border bg-white duration-200 py-1 px-2 inline-block border-archives text-archives hover:text-white hover:bg-archives border-archives hover:border-white mb-3 ml-1 mr-4'} onClick={() => this.handleKeywordsRemoveButton(i)}><i className={'la la-times'}/></button> }
                                     {this.state.keywords.length - 1 === i && <div><button type={'button'} className={'rounded-full cursor-pointer border bg-white duration-200 py-1 pl-5 md:pl-7 pr-6 md:pr-8 inline-block border-archives text-white bg-archives hover:bg-archives-dark hover:border-archives mb-3'} onClick={this.handleKeywordsAddButton}><i className={'la la-plus'}/> Add</button></div> }
@@ -89,7 +86,7 @@ class ArticleAddMoreInfo extends Component {
                 </div>
                 <div key={'full_link'} className={'mb-6'}>
                     <label>Full Text Link</label>
-                    <input type="text" placeholder={'Full Text Link (URL)'} name={'full_text_link'} onChange={this.handleChange} autoComplete={'off'} required />
+                    <input type="text" placeholder={'Full Text Link (URL)'} name={'full_text_link'} onChange={this.handleChange} autoComplete={'off'}  />
                     <span className={'text-gray-400 helper-text text-sm md:text-base'}>You may use journal full text link, DOI link, research-gate link, University archive link or academia.edu links.</span>
                 </div>
                 <div key={'pdf_link'} className={'mb-6'}>

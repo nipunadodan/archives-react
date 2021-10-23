@@ -1,12 +1,59 @@
 import React, {Component} from "react";
-import Button from "../../../template/common/Button";
 
 class ArticleAddBasicInfo extends Component{
-    state = {
-        values:[],
-        coauthors:[
-            {coauthor:''}
-        ],
+    constructor(props) {
+        super(props);
+        this.state = {
+            values:{
+                type:0,
+                subject_area:0,
+                doi:'',
+                license:'',
+                title:'',
+                published_place:'',
+                page_no_from:0,
+                page_no_to:0,
+                author:'',
+            },
+            coauthors:[
+                {coauthor:''}
+            ],
+        }
+    }
+
+
+    componentDidMount() {
+        if(this.props.article){
+            const article = this.props.article.data
+
+            const authors = article.authors.split(',');
+            const coauthors = []
+            authors.map(coauthor => {
+                return coauthors.push({
+                    coauthor:coauthor
+                })
+            })
+            this.setState({
+                coauthors:coauthors
+            })
+
+            this.setState({
+                values:{
+                    type:article.type,
+                    subject_area:article.subject_area,
+                    doi:article.doi,
+                    license:article.license,
+                    title:article.title,
+                    published_place:article.published_place,
+                    page_no_from:article.page_no_from,
+                    page_no_to:article.page_no_to,
+                    author:article.author,
+                    authors:[...authors.map(x => x)]
+                }
+            },function () {
+                this.props.parentCallback(this.state.values);
+            })
+        }
     }
 
     handleChange = (event) =>{
@@ -53,53 +100,55 @@ class ArticleAddBasicInfo extends Component{
     render() {
         return(
             <div className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-14 mt-6'}>
-                <h3 className={'font-black text-4xl mb-6'}>Basic Info</h3>
-
+                {JSON.stringify(this.state.values)}
+                <h3 className={'font-black text-4xl mb-6 mt-6'}>Basic Info</h3> {/*TODO:remove top margin*/}
                 <div className={'md:grid md:grid-cols-4 gap-6 mb-6'}>
                     <div key={'type'}>
                         <label>Paper Type</label>
-                        <select name={'type'} onChange={this.handleChange}>
-                            <option>Select Paper Type</option>
-                            <option>Research Full Paper</option>
+                        <select name={'type'} value={this.state.values.type} onChange={this.handleChange}>
+                            <option value="0">Select paper type</option>
+                            <option value="1">Journal Paper</option>
+                            <option value="2">Conference Full Text</option>
+                            <option value="3">Conference Abstract</option>
                         </select>
                     </div>
                     <div key={'subject_area'}>
                         <label>Subject Area</label>
-                        <select name={'subject_area'} onChange={this.handleChange}>
-                            <option>Select Subject Area</option>
+                        <select name={'subject_area'} value={this.state.values.subject_area} onChange={this.handleChange}>
+                            <option value={0}>Select Subject Area</option>
                             <option>Physics</option>
                         </select>
                     </div>
                     <div key={'doi'}>
                         <label>Digital Object Identifier (DOI)</label>
-                        <input type="text" placeholder={'Digital Object Identifier (DOI)'} name={'doi'} onChange={this.handleChange} autoComplete={'off'} />
+                        <input type="text" placeholder={'Digital Object Identifier (DOI)'} name={'doi'} onChange={this.handleChange} value={this.state.values.doi} autoComplete={'off'} />
                     </div>
                     <div key={'license'}>
                         <label>License</label>
-                        <input type="text" placeholder={'License'} name={'license'} onChange={this.handleChange} autoComplete={'off'} />
+                        <input type="text" placeholder={'License'} name={'license'} onChange={this.handleChange} value={this.state.values.license} autoComplete={'off'} />
                     </div>
                 </div>
                 <div key={'title'} className={'mb-6'}>
                     <label>Title</label>
-                    <input type="text" placeholder={'Title'} name={'title'} onChange={this.handleChange} autoComplete={'off'} required />
+                    <input type="text" placeholder={'Title'} name={'title'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.title} required />
                 </div>
                 <div className={'md:grid md:grid-cols-12 gap-6 mb-6'}>
                     <div className={'col-span-9'}>
                         <label>Conference/Journal</label>
-                        <input type="text" placeholder={'Conference/Journal'} name={'published_place'} onChange={this.handleChange} autoComplete={'off'} required />
+                        <input type="text" placeholder={'Conference/Journal'} name={'published_place'} onChange={this.handleChange} value={this.state.values.published_place} autoComplete={'off'} required />
                     </div>
                     <div className={'col-span-3'}>
                         <label>If applicable, Pages Range</label>
                         <div className={'grid grid-cols-2 gap-6'}>
-                            <input type="text" placeholder={'From'} name={'page_no_from'} onChange={this.handleChange} autoComplete={'off'} />
-                            <input type="text" placeholder={'To'} name={'page_no_to'} onChange={this.handleChange} autoComplete={'off'} />
+                            <input type="text" placeholder={'From'} name={'page_no_from'} onChange={this.handleChange} value={this.state.values.page_no_from} autoComplete={'off'} />
+                            <input type="text" placeholder={'To'} name={'page_no_to'} onChange={this.handleChange} value={this.state.values.page_no_to} autoComplete={'off'} />
                         </div>
                     </div>
                 </div>
                 <div className={'md:grid md:grid-cols-2 gap-6 mb-6'}>
                     <div key={'author'}>
                         <label>First Author</label>
-                        <input type="text" placeholder={'First Author'} name={'author'} onChange={this.handleChange} autoComplete={'off'} required />
+                        <input type="text" placeholder={'First Author'} name={'author'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.author} required />
                     </div>
                     <div key={'authors-1'}>
                         <label>Co-authors</label>
