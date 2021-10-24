@@ -20,3 +20,7 @@
     content: "\f081"; }
 .fa-linkedin:before {
     content: "\f08c"; }
+
+.copyrights{
+    font-feature-settings: "case" 1, "tnum" 1;
+}
