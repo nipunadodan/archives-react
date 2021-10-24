@@ -22,19 +22,15 @@ class LoginForm extends Component{
     }
 
     handleSubmit = (event) =>{
-        let api_base = '';
-        if (process.env.NODE_ENV === 'production') {
-            api_base = process.env.REACT_APP_API_BASE;
-        }else{
-            api_base = process.env.REACT_APP_API_BASE_LOCAL;
-        }
+        let api_base = process.env.REACT_APP_API_BASE;
+
         fetch(api_base+'login',{
             method:'post',
             body: new URLSearchParams({
                 'username' : this.state.username,
                 'password' : this.state.password
             }),
-            credentials: 'same-origin'
+            credentials: 'include'
         })
             .then(res => res.json())
             .then(

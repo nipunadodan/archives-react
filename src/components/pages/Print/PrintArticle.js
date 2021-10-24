@@ -23,7 +23,7 @@ class PrintArticle extends Component{
         // eslint-disable-next-line no-unused-expressions
         option ? window.scrollTo(0, 0) : null;
 
-        fetch(api_base+'article-got-process',{
+        fetch(api_base+'article-got',{
             method:'post',
             body:JSON.stringify(data)
         })
@@ -33,7 +33,21 @@ class PrintArticle extends Component{
                     isLoaded: true,
                     article:result
                 })
-            })
+                if(result.status !== 'success'){
+                    this.setState({
+                        error:{
+                            message:result.error
+                        }
+                    })
+                }
+            },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
     }
 
     render() {

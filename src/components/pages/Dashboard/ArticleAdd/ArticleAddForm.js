@@ -49,12 +49,7 @@ class ArticleAddForm extends Component{
         };
         console.log(finalState);
 
-        /*let api_base = '';
-        if (process.env.NODE_ENV === 'production') {
-            api_base = process.env.REACT_APP_API_BASE;
-        }else{
-            api_base = process.env.REACT_APP_API_BASE_LOCAL;
-        }
+        /*let api_base = process.env.REACT_APP_API_BASE;
 
         fetch(api_base+'article-add',{
             method:'post',

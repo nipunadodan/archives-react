@@ -17,12 +17,8 @@ class Article extends Component{
         }
     }
     componentDidMount() {
-        let api_base = '';
-        if (process.env.NODE_ENV === 'production') {
-            api_base = process.env.REACT_APP_API_BASE;
-        }else{
-            api_base = process.env.REACT_APP_API_BASE_LOCAL;
-        }
+        let api_base =process.env.REACT_APP_API_BASE;
+
         const option = this.props.match.params.id;
         const id = this.props.id;
         const data = {
