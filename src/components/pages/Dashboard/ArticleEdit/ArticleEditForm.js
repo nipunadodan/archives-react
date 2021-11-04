@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import ArticleAddBasicInfo from "../Article/ArticleAddBasicInfo";
-import ArticleAddAbstract from "../Article/ArticleAddAbstract";
-import ArticleAddMoreInfo from "../Article/ArticleAddMoreInfo";
-import ArticleAddSubmit from "../Article/ArticleAddSubmit";
+import ArticleAddBasicInfo from "../ArticleManageForm/ArticleAddBasicInfo";
+import ArticleAddAbstract from "../ArticleManageForm/ArticleAddAbstract";
+import ArticleAddMoreInfo from "../ArticleManageForm/ArticleAddMoreInfo";
+import ArticleAddSubmit from "../ArticleManageForm/ArticleAddSubmit";
 import {withRouter} from "react-router-dom";
 
 class ArticleEditForm extends Component{

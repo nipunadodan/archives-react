@@ -31,8 +31,8 @@ class App extends Component{
     render() {
         if(!this.state.token) {
             return <Router basename={'archives'}>
-                <Login tokenCallback={this.handleTokenCallback} />
-            </Router>
+                    <Login tokenCallback={this.handleTokenCallback} />
+                </Router>
         }
         return(
             <Router basename={'archives'}>
