@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./components/pages/home/Home";
 import Article from "./components/pages/Article/Article";
 import Highlights from "./components/pages/Highlights/Highlights";
@@ -8,6 +8,8 @@ import Login from "./components/pages/Login/Login";
 import PrintArticle from "./components/pages/Print/PrintArticle";
 import ArticleAdd from "./components/pages/Dashboard/ArticleAdd/ArticleAdd";
 import ArticleEdit from "./components/pages/Dashboard/ArticleEdit/ArticleEdit";
+import NotFound from "./components/pages/NotFound/NotFound";
+import Dashboard from "./components/pages/Dashboard/Dashboard";
 
 class App extends Component{
     state = {
@@ -29,36 +31,28 @@ class App extends Component{
     }
 
     render() {
-        if(!this.state.token) {
+        /*if(!this.state.token) {
             return <Router basename={'archives'}>
                     <Login tokenCallback={this.handleTokenCallback} />
                 </Router>
-        }
+        }*/
         return(
             <Router basename={'archives'}>
-                <Switch>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-                    <Route exact path="/article/:id">
-                        <Article />
-                    </Route>
-                    <Route exact path="/print/:id">
-                        <PrintArticle />
-                    </Route>
-                    <Route exact path="/articles/:option">
-                        <Highlights />
-                    </Route>
-                    <Route exact path="/posts">
-                        <BlogPosts />
-                    </Route>
-                    <Route exact path="/add-new">
-                        <ArticleAdd />
-                    </Route>
-                    <Route exact path="/edit/:id">
-                        <ArticleEdit />
-                    </Route>
-                </Switch>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login tokenCallback={this.handleTokenCallback} />} />
+                    <Route path="/article/:id" element={<Article />} />
+                    <Route path="/print/:id" element={<PrintArticle />} />
+                    <Route path="/articles/:option" element={<Highlights />} />
+                    <Route path="/posts" element={<BlogPosts />} />
+                    <Route path="/add-new" element={<ArticleAdd />} />
+                    <Route path="/edit/:id" element={<ArticleEdit />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route
+                        path="*"
+                        element={<NotFound />}
+                    />
+                </Routes>
             </Router>
         )
     }

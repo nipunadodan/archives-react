@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {withRouter} from "react-router-dom";
 import './PlainText.css'
 import PlainText from "./PlainText";
 
@@ -70,4 +69,4 @@ class PrintArticle extends Component{
     }
 }
 
-export default withRouter(PrintArticle)
+export default PrintArticle

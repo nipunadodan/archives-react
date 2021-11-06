@@ -14,9 +14,9 @@ function Home() {
         <div className="container mx-auto">
             <Header />
             <Hero />
-            <Advert />
-            <PostHighlights />
             <AdvertSecond />
+            <PostHighlights />
+            <Advert />
             <BlogPosts />
             <Footer />
         </div>

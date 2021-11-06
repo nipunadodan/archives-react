@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-import {withRouter} from "react-router-dom";
 import Header from "../../template/header/Header";
 import Footer from "../../template/footer/Footer";
 import ArticleHeader from "./ArticleHeader";
 import ArticleMeta from "./ArticleMeta";
 import ArticleLinks from "./ArticleLinks";
 import ArticleAbstract from "./ArticleAbstract";
+import {withRouter} from "../../../Helpers/Helpers";
 
 class Article extends Component{
     constructor(props) {
@@ -17,16 +17,15 @@ class Article extends Component{
         }
     }
     componentDidMount() {
-        let api_base =process.env.REACT_APP_API_BASE;
-
-        const option = this.props.match.params.id;
+        const api_base =process.env.REACT_APP_API_BASE;
+        const params = this.props.params;
         const id = this.props.id;
         const data = {
-            id: (option ? option : id)
+            id: ("id" in params ? params.id : id)
         }
 
         // eslint-disable-next-line no-unused-expressions
-        option ? window.scrollTo(0, 0) : null;
+        "id" in params ? window.scrollTo(0, 0) : null;
 
         fetch(api_base+'article-got',{
                 method:'post',

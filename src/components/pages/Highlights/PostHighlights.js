@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Button from "../../template/common/Button";
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {withRouter} from "../../../Helpers/Helpers";
 
 class PostHighlights extends Component{
     constructor(props) {
@@ -14,13 +15,15 @@ class PostHighlights extends Component{
 
     componentDidMount() {
         let api_base = process.env.REACT_APP_API_BASE;
-        const option = this.props.match.params.option;
+        const params = this.props.params;
+        const postCount = "option" in params ? params.option : 4;
+        console.log(postCount)
         const data = {
-            count:(option === 'all' ? 0 : option)
+            count:(postCount === 'all' ? 0 : postCount)
         };
 
         // eslint-disable-next-line no-unused-expressions
-        option ? window.scrollTo(0, 0) : null;
+        postCount ? window.scrollTo(0, 0) : null;
 
         fetch(api_base+'articles-featured',{
                 method:'post',
@@ -70,7 +73,7 @@ class PostHighlights extends Component{
                                             </div>
                                         </div>
                                     ))}
-                                    {!this.props.match.params.option?
+                                    {!("option" in this.props.params) ?
                                         <div className={'text-center'}>
                                             <Link to={'articles/all'}><Button type={'button'} outline={true} text={'More Highlights'}/></Link>
                                         </div>

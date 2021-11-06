@@ -3,7 +3,7 @@ import ArticleAddBasicInfo from "../ArticleManageForm/ArticleAddBasicInfo";
 import ArticleAddAbstract from "../ArticleManageForm/ArticleAddAbstract";
 import ArticleAddMoreInfo from "../ArticleManageForm/ArticleAddMoreInfo";
 import ArticleAddSubmit from "../ArticleManageForm/ArticleAddSubmit";
-import {withRouter} from "react-router-dom";
+import {withRouter} from "../../../../Helpers/Helpers";
 
 class ArticleEditForm extends Component{
     state = {
@@ -89,10 +89,10 @@ class ArticleEditForm extends Component{
 
         let api_base = process.env.REACT_APP_API_BASE;
 
-        const option = this.props.match.params.id;
+        const params = this.props.params;
         const id = this.props.id;
         const data = {
-            id: (option ? option : id)
+            id: ("id" in params ? params.id : id)
         }
 
         fetch(api_base+'article-got',{

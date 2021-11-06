@@ -123,34 +123,34 @@ class ArticleAddBasicInfo extends Component{
                     </div>
                     <div key={'doi'}>
                         <label>Digital Object Identifier (DOI)</label>
-                        <input type="text" placeholder={'Digital Object Identifier (DOI)'} name={'doi'} onChange={this.handleChange} value={this.state.values.doi} autoComplete={'off'} />
+                        <input type="text" placeholder={'Digital Object Identifier (DOI)'} name={'doi'} onChange={this.handleChange} value={this.state.values.doi ?? ''} autoComplete={'off'} />
                     </div>
                     <div key={'license'}>
                         <label>License</label>
-                        <input type="text" placeholder={'License'} name={'license'} onChange={this.handleChange} value={this.state.values.license} autoComplete={'off'} />
+                        <input type="text" placeholder={'License'} name={'license'} onChange={this.handleChange} value={this.state.values.license ?? ''} autoComplete={'off'} />
                     </div>
                 </div>
                 <div key={'title'} className={'mb-6'}>
                     <label>Title</label>
-                    <input type="text" placeholder={'Title'} name={'title'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.title} required />
+                    <input type="text" placeholder={'Title'} name={'title'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.title ?? ''} required />
                 </div>
                 <div className={'md:grid md:grid-cols-12 gap-6 mb-6'}>
                     <div className={'col-span-9'}>
                         <label>Conference/Journal</label>
-                        <input type="text" placeholder={'Conference/Journal'} name={'published_at_place'} onChange={this.handleChange} value={this.state.values.published_at_place} autoComplete={'off'} required />
+                        <input type="text" placeholder={'Conference/Journal'} name={'published_at_place'} onChange={this.handleChange} value={this.state.values.published_at_place ?? ''} autoComplete={'off'} required />
                     </div>
                     <div className={'col-span-3'}>
                         <label>If applicable, Pages Range</label>
                         <div className={'grid grid-cols-2 gap-6'}>
-                            <input type="text" placeholder={'From'} name={'page_from'} onChange={this.handleChange} value={this.state.values.page_from} autoComplete={'off'} />
-                            <input type="text" placeholder={'To'} name={'page_to'} onChange={this.handleChange} value={this.state.values.page_to} autoComplete={'off'} />
+                            <input type="text" placeholder={'From'} name={'page_from'} onChange={this.handleChange} value={this.state.values.page_from ?? ''} autoComplete={'off'} />
+                            <input type="text" placeholder={'To'} name={'page_to'} onChange={this.handleChange} value={this.state.values.page_to ?? ''} autoComplete={'off'} />
                         </div>
                     </div>
                 </div>
                 <div className={'md:grid md:grid-cols-2 gap-6 mb-6'}>
                     <div key={'author'}>
                         <label>First Author</label>
-                        <input type="text" placeholder={'First Author'} name={'author'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.author} required />
+                        <input type="text" placeholder={'First Author'} name={'author'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.author ?? ''} required />
                     </div>
                     <div key={'authors-1'}>
                         <label>Co-authors</label>

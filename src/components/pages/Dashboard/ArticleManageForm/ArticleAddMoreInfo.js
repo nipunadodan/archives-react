@@ -3,7 +3,7 @@ import React, {Component} from "react";
 class ArticleAddMoreInfo extends Component {
     state = {
         values:{
-            publication_year:"2015",
+            publication_year:"",
             publication_date:"",
             volume:'',
             issue:'',
@@ -93,19 +93,19 @@ class ArticleAddMoreInfo extends Component {
                 <div className={'md:grid md:grid-cols-4 gap-6 mb-6'}>
                     <div key={'pub_year'}>
                         <label>Publication Year</label>
-                        <input type="text" pattern={'^(19|20)\\d{2}$'} placeholder={'Publication Year'} name={'publication_year'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.publication_year}  />
+                        <input type="text" pattern={'^(19|20)\\d{2}$'} placeholder={'Publication Year'} name={'publication_year'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.publication_year ?? ''}  />
                     </div>
                     <div key={'pub_date'}>
                         <label>Publication Date</label>
-                        <input type="date" placeholder={'Publication Date'} name={'publication_date'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.publication_date}  />
+                        <input type="date" placeholder={'Publication Date'} name={'publication_date'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.publication_date ?? ''}  />
                     </div>
                     <div key={'volume'}>
                         <label>Volume</label>
-                        <input type="text" placeholder={'Volume'} name={'volume'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.volume}  />
+                        <input type="text" placeholder={'Volume'} name={'volume'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.volume ?? ''}  />
                     </div>
                     <div key={'issue'}>
                         <label>Issue</label>
-                        <input type="text" placeholder={'Issue'} name={'issue'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.issue}  />
+                        <input type="text" placeholder={'Issue'} name={'issue'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.issue ?? ''}  />
                     </div>
                 </div>
                 <div key={'keywords'} className={'mb-6'}>
@@ -125,12 +125,12 @@ class ArticleAddMoreInfo extends Component {
                 </div>
                 <div key={'full_link'} className={'mb-6'}>
                     <label>Full Text Link</label>
-                    <input type="text" placeholder={'Full Text Link (URL)'} name={'url'} onChange={this.handleChange} autoComplete={'off'} required value={this.state.values.url}  />
+                    <input type="text" placeholder={'Full Text Link (URL)'} name={'url'} onChange={this.handleChange} autoComplete={'off'} required value={this.state.values.url ?? ''}  />
                     <span className={'text-gray-400 helper-text text-sm md:text-base'}>You may use journal full text link, DOI link, research-gate link, University archive link or academia.edu links.</span>
                 </div>
                 <div key={'pdf_link'} className={'mb-6'}>
                     <label>PDF Link</label>
-                    <input type="text" placeholder={'PDF Link (URL)'} name={'pdf_url'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.pdf_url} />
+                    <input type="text" placeholder={'PDF Link (URL)'} name={'pdf_url'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.pdf_url ?? ''} />
                     <span className={'text-gray-400 helper-text text-sm md:text-base'}>Please make sure you are providing the PDF link, not any intermediary URL.</span>
                 </div>
             </div>

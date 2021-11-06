@@ -1,3 +1,5 @@
+import {useLocation, useParams} from "react-router-dom";
+
 export function getDateStr(date){
     let dateObj = new Date(date);
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -19,4 +21,17 @@ export function getJwtInfo(token) {
     }).join(''));
 
     return JSON.parse(jsonPayload);
+}
+
+export function withRouter( Child ) {
+    return ( props ) => {
+        const location = useLocation();
+        const params = useParams();
+        return <Child { ...props } params={params} location={ location } />;
+    }
+}
+
+export function isLoggedIn() {
+    const login = localStorage.getItem('login');
+    return !!login;
 }
