@@ -49,7 +49,7 @@ class ArticleAddForm extends Component{
         };
         console.log(finalState);
 
-        /*let api_base = process.env.REACT_APP_API_BASE;
+        let api_base = process.env.REACT_APP_API_BASE;
 
         fetch(api_base+'article-add',{
             method:'post',
@@ -72,7 +72,7 @@ class ArticleAddForm extends Component{
                         error
                     })
                 }
-            )*/
+            )
 
         return false;
     }

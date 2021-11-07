@@ -30,7 +30,7 @@
     "workbox-streams": "^6.3.0"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "dotenv -e .env.dev craco start",
     "build:dev": "dotenv -e .env.dev craco build && rm -rf ../../../archives && cp -r build ../../../archives",
     "build:prod": "dotenv -e .env.production craco build",
     "build": "echo \"Please use build:dev or build:prod \" && exit 1",

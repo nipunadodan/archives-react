@@ -9,7 +9,7 @@ import PrintArticle from "./components/pages/Print/PrintArticle";
 import ArticleAdd from "./components/pages/Dashboard/ArticleAdd/ArticleAdd";
 import ArticleEdit from "./components/pages/Dashboard/ArticleEdit/ArticleEdit";
 import NotFound from "./components/pages/NotFound/NotFound";
-import Dashboard from "./components/pages/Dashboard/Dashboard";
+import Dashboard from "./components/pages/Dashboard/Dashboard/Dashboard";
 
 class App extends Component{
     state = {
