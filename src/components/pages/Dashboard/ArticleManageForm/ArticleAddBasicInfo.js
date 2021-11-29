@@ -1,27 +1,24 @@
 import React, {Component} from "react";
 
 class ArticleAddBasicInfo extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            values:{
-                id:0,
-                type:0,
-                subject_area:0,
-                doi:'',
-                license:'',
-                title:'',
-                published_at_place:'',
-                page_from:0,
-                page_to:0,
-                author:'',
-            },
-            coauthors:[
-                {coauthor:''}
-            ],
-        }
+    state = {
+        values:{
+            id:0,
+            type:0,
+            subject_area:0,
+            doi:'',
+            license:'',
+            title:'',
+            published_at_place:'',
+            page_from:0,
+            page_to:0,
+            author:'',
+            authors:[],
+        },
+        coauthors:[
+            {coauthor:''}
+        ],
     }
-
 
     componentDidMount() {
         if(this.props.article){
@@ -71,16 +68,17 @@ class ArticleAddBasicInfo extends Component{
 
     handleAuthorsChange = (event, index) =>{
         const {name, value} = event.target;
-        const authors = [...this.state.coauthors];
+        let authors = [...this.state.coauthors];
         authors[index][name] = value;
 
-        let currstate = this.state.values;
-        currstate['authors'] = [...authors.map(x => x.coauthor)]
-
-        this.setState({
-            values:currstate
-        }, function () {
-            this.props.parentCallback(this.state.values);
+        this.setState((prevState) => ({
+            values:{
+                ...prevState.values,
+                authors:[...authors.map(x => x.coauthor)]
+            }
+        }), () => {
+            this.props.parentCallback(this.state.values)
+            //console.log(this.state.values)
         })
     }
 

@@ -17,7 +17,7 @@ class PostHighlights extends Component{
         let api_base = process.env.REACT_APP_API_BASE;
         const params = this.props.params;
         const postCount = "option" in params ? params.option : 4;
-        console.log(postCount)
+        //console.log(postCount)
         const data = {
             count:(postCount === 'all' ? 0 : postCount)
         };

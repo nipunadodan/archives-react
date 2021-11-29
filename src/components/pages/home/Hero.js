@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Button from "../../template/common/Button";
 import hero from './search_hero.png'
 import {Link} from "react-router-dom";
 

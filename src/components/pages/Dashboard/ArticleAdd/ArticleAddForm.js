@@ -6,7 +6,7 @@ import ArticleAddSubmit from "../ArticleManageForm/ArticleAddSubmit";
 
 class ArticleAddForm extends Component{
     state = {
-        basic : [],
+        basics : [],
         abstract : null,
         more : [],
         abstractObject:null,
@@ -17,7 +17,10 @@ class ArticleAddForm extends Component{
     handleBasicData = (data) =>{
         this.setState({
             basics: data
+        },()=>{
+            //console.log(this.state.basics);
         })
+
     }
 
     handleAbstractData = (data) =>{

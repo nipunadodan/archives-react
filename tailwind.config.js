@@ -10,7 +10,11 @@ module.exports = {
           light: '#be2272',
           DEFAULT: '#A81E65',
           dark: '#7d164b'
-        }
+        },
+        success:'#198754',
+        danger:'#dc3545',
+        info:'#0dcaf0',
+        warning:'#ffc107',
       }
     },
   },

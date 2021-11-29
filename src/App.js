@@ -4,12 +4,15 @@ import Home from "./components/pages/home/Home";
 import Article from "./components/pages/Article/Article";
 import Highlights from "./components/pages/Highlights/Highlights";
 import BlogPosts from "./components/pages/Blog/BlogPosts";
-import Login from "./components/pages/Login/Login";
+import Login from "./components/pages/User/Login/Login";
 import PrintArticle from "./components/pages/Print/PrintArticle";
 import ArticleAdd from "./components/pages/Dashboard/ArticleAdd/ArticleAdd";
 import ArticleEdit from "./components/pages/Dashboard/ArticleEdit/ArticleEdit";
 import NotFound from "./components/pages/NotFound/NotFound";
 import Dashboard from "./components/pages/Dashboard/Dashboard/Dashboard";
+import Logout from "./components/pages/User/Logout/Logout";
+import PrivateRoute from "./Helpers/PrivateRoute";
+import Locked from "./components/pages/NotFound/Locked";
 
 class App extends Component{
     state = {
@@ -23,9 +26,9 @@ class App extends Component{
     }
 
     componentDidMount() {
-        if(localStorage.getItem('login') !== null){
+        if(localStorage.getItem('archives_login') !== null){
             this.setState({
-                token: JSON.parse(localStorage.getItem('login'))
+                token: JSON.parse(localStorage.getItem('archives_login'))
             })
         }
     }
@@ -33,7 +36,7 @@ class App extends Component{
     render() {
         /*if(!this.state.token) {
             return <Router basename={'archives'}>
-                    <Login tokenCallback={this.handleTokenCallback} />
+                    <User tokenCallback={this.handleTokenCallback} />
                 </Router>
         }*/
         return(
@@ -41,13 +44,19 @@ class App extends Component{
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login tokenCallback={this.handleTokenCallback} />} />
+                    <Route path="/logout" element={<Logout />} />
                     <Route path="/article/:id" element={<Article />} />
                     <Route path="/print/:id" element={<PrintArticle />} />
                     <Route path="/articles/:option" element={<Highlights />} />
                     <Route path="/posts" element={<BlogPosts />} />
                     <Route path="/add-new" element={<ArticleAdd />} />
-                    <Route path="/edit/:id" element={<ArticleEdit />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/dashboard" element={
+                        <PrivateRoute roles={["ROLE_USER"]} minlevel={4}>
+                            <Dashboard />
+                        </PrivateRoute>
+                    } />
+                    <Route path="/dashboard/edit/:id" element={<ArticleEdit />} />
+                    <Route path="/permission" element={<Locked />} />
                     <Route
                         path="*"
                         element={<NotFound />}
