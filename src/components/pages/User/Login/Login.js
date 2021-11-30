@@ -6,7 +6,7 @@ class Login extends Component{
     render() {
         return(
             <div className={'md:w-2/5 mx-auto'}>
-                <Header />
+                <Header nav={false} />
                 <LoginForm />
             </div>
         )

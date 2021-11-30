@@ -9,7 +9,7 @@ class Dashboard extends Component{
     render() {
         return(
             <div className={'container mx-auto'}>
-                <Header />
+                <Header nav={true} />
                 <Hello />
                 <Statistics />
                 <DashboardArticles />

@@ -13,16 +13,11 @@ import Dashboard from "./components/pages/Dashboard/Dashboard/Dashboard";
 import Logout from "./components/pages/User/Logout/Logout";
 import PrivateRoute from "./Helpers/PrivateRoute";
 import Locked from "./components/pages/NotFound/Locked";
+import Register from "./components/pages/User/Register/Register";
 
 class App extends Component{
     state = {
         token : false
-    }
-
-    handleTokenCallback = (tokenData) => {
-        this.setState({
-            token: tokenData
-        })
     }
 
     componentDidMount() {
@@ -43,19 +38,28 @@ class App extends Component{
             <Router basename={'archives'}>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login tokenCallback={this.handleTokenCallback} />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/article/:id" element={<Article />} />
                     <Route path="/print/:id" element={<PrintArticle />} />
                     <Route path="/articles/:option" element={<Highlights />} />
                     <Route path="/posts" element={<BlogPosts />} />
-                    <Route path="/add-new" element={<ArticleAdd />} />
+                    <Route path="/add-new" element={
+                        <PrivateRoute roles={["ROLE_USER"]} minlevel={4}>
+                            <ArticleAdd />
+                        </PrivateRoute>
+                    } />
                     <Route path="/dashboard" element={
                         <PrivateRoute roles={["ROLE_USER"]} minlevel={4}>
                             <Dashboard />
                         </PrivateRoute>
                     } />
-                    <Route path="/dashboard/edit/:id" element={<ArticleEdit />} />
+                    <Route path="/dashboard/edit/:id" element={
+                        <PrivateRoute roles={['ROLE_USER','ROLE_ADMIN','ROLE_SUPER_ADMIN']} minlevel={4}>
+                            <ArticleEdit />
+                        </PrivateRoute>
+                    } />
                     <Route path="/permission" element={<Locked />} />
                     <Route
                         path="*"

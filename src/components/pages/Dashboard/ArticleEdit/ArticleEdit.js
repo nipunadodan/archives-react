@@ -8,7 +8,7 @@ class ArticleEdit extends Component{
     render() {
         return(
             <div key={'add-new-container'} className={'container mx-auto'}>
-                <Header />
+                <Header nav={true} />
                 <ArticleEditIntructions />
                 <ArticleEditForm />
                 <Footer />

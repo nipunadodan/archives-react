@@ -12,7 +12,7 @@ function Home() {
     window.scrollTo(0, 0)
     return (
         <div className="container mx-auto">
-            <Header />
+            <Header nav={true} />
             <Hero />
             <AdvertSecond />
             <PostHighlights />

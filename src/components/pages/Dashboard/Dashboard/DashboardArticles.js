@@ -12,11 +12,11 @@ export default function DashboardArticles(){
         const params = {
             limit:30,
             status:0,
-            user:1
         }
         fetch(api_base+'articles-get', {
             method:'post',
-            body:JSON.stringify(params)
+            body:JSON.stringify(params),
+            credentials:'include'
         })
             .then(res => res.json())
             .then((result) => {

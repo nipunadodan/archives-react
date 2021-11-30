@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Button from "../../../template/common/Button";
-import {Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
 class LoginForm extends Component{
     constructor(props) {
@@ -36,7 +36,6 @@ class LoginForm extends Component{
                 'username' : this.state.username,
                 'password' : this.state.password
             }),
-            credentials: 'include'
         })
             .then(res => res.json())
             .then(
@@ -77,7 +76,9 @@ class LoginForm extends Component{
         }
         return(
             <>
-                <div className="login-wrapper bg-white rounded-2xl px-8 md:px-16 py-20 mt-6">
+                <div className="login-wrapper bg-white rounded-2xl px-8 md:px-16 pt-14 pb-20 mt-6">
+                    <h1 className={'font-black text-3xl text-center mb-6'}>Login</h1>
+                    <p className={'text-center text-sm mb-8 text-gray-800'}>Don't have an account? <Link className={'font-bold hover:text-black'} to={'/register'}>Register</Link></p>
                     <form onSubmit={this.handleSubmit}>
                         <div className={'my-3'}>
                             <label className={'text-sm mb-1 inline-block'}>Username</label>

@@ -52,7 +52,7 @@ class Article extends Component{
         const {error, isLoaded, article} = this.state;
         return (
             <div key={'articleContainer'} className={'container mx-auto'}>
-                <Header />
+                <Header nav={true} />
                     {error
                         ? <div key={'error'} className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-12 md:mt-6'}>Error: {error.message}</div>
                         : [(!isLoaded

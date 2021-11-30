@@ -11,10 +11,18 @@ module.exports = {
           DEFAULT: '#A81E65',
           dark: '#7d164b'
         },
-        success:'#198754',
-        danger:'#dc3545',
-        info:'#0dcaf0',
-        warning:'#ffc107',
+        success: {
+          DEFAULT:'#198754'
+        },
+        danger: {
+          DEFAULT: '#dc3545'
+        },
+        info: {
+          DEFAULT: '#0dcaf0'
+        },
+        warning: {
+          DEFAULT: '#ffc107'
+        },
       }
     },
   },
