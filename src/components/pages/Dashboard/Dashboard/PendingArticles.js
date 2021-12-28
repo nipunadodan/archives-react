@@ -21,6 +21,7 @@ export default class PendingArticles extends Component{
     * Check this solution for updating one element
     * https://stackoverflow.com/questions/61820696/react-update-one-item-element-in-a-list-by-fetch
     * */
+
     approve = (id) => {
         const data = {
             article_id:id,
@@ -40,7 +41,7 @@ export default class PendingArticles extends Component{
                 (result) => {
                     this.setState(prevState =>({
                         approving:false,
-                        articles: prevState.articles
+                        articles: [...prevState.articles].map(article => article.id === id ? { ...article, updated:true } : article)
                     }))
                 }
             )
@@ -72,7 +73,7 @@ export default class PendingArticles extends Component{
                                         </Link>
                                         <PrivateComponent roles={'ROLE_SUPER_ADMIN'}>
                                             <button onClick={() => this.approve(article.id)} className={'bg-gray-200 rounded-full inline-block px-3 py-2 text-center mb-3 mx-3'}>
-                                                <i title={'Approve'} className={'la la-check'}/>
+                                                <i title={'Approve'} className={article.updated ? 'la la-check-double' : 'la la-check'}/>
                                             </button>
                                         </PrivateComponent>
                                     </div>
