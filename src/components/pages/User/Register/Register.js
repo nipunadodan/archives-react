@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import Button from "../../../template/common/Button";
 import Header from "../../../template/header/Header";
 
@@ -80,6 +80,13 @@ class Register extends Component{
                     console.log(result)
                     if(result.status === 'success'){
                         //TODO: Modal popup or redirect to new page with success message
+                        this.setState({
+                            status:{
+                                type:result.status,
+                                message:result.message
+                            }
+                        })
+
                     }else{
                         this.setState({
                             status:{
@@ -104,6 +111,9 @@ class Register extends Component{
     }
 
     render() {
+        if(this.state.status.type === 'success'){
+            return <Navigate to='/login'/>;
+        }
         return (
             <div className={'md:w-4/5 mx-auto'}>
                 <Header nav={false} />

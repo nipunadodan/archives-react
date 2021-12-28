@@ -24,7 +24,7 @@ export default function Statistics(){
                     <div className={'mt-3 text-xs md:text-base'}><i className={'la la-bookmark  pr-3'} />Article Views**</div>
                 </div>
             </div>
-            <p className={'text-xs md:my-4 my-6 text-gray-600'}>* Highlighted articles are picked by admins and you may request your article to be featured as a highlighted article for a month for as low as LKR 2500.</p>
+            <p className={'text-xs md:my-4 my-6 text-gray-600'}>* Highlighted articles are picked by admins and you may request your article to be featured as a highlighted article for a month for as low as LKR 250.</p>
             <p className={'text-xs md:my-4 my-6 text-gray-600'}>** Views are not audited except those are of the logged-in author's views. Logged-in author views will be only counted once. These numbers are for your own reference only.</p>
         </div>
     )

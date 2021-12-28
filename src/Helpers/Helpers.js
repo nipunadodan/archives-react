@@ -33,7 +33,11 @@ export function withRouter( Child ) {
 
 export function useAuth(props) {
     const user = JSON.parse(localStorage.getItem('archives_user'))
-    return props.roles.includes(user.role) || props.minlevel <= user.level
+    if(user) {
+        return props.roles.includes(user.role) || props.minlevel <= user.level
+    }else{
+        return false
+    }
 }
 
 export function isLoggedIn() {

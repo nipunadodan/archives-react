@@ -11,7 +11,7 @@ export default function PublishedArticles(props) {
             {
                 props.isLoaded ?
                     articles.map((article) => (
-                        <div key={article.id} className={'my-6'}>
+                        <div key={article.id} className={'my-6 border-b'}>
                             <article className={'my-8 flex'}>
                                 <div className={'flex-grow'}>
                                     <h3 className={'text-xl font-semibold mb-4'}>{article.title}</h3>
