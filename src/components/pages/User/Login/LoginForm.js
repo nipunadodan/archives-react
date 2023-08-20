@@ -56,7 +56,7 @@ class LoginForm extends Component{
                 }
             )
             .catch((error) => {
-                console.log(error)
+                // console.log(error)
                 this.setState({
                     status: {
                         type: 'danger',
@@ -99,7 +99,7 @@ class LoginForm extends Component{
                     </form>
                 </div>
                 <div className={"login-wrapper text-white rounded-2xl px-8 py-6 mt-6 "+(this.state.status.type !== '' ? 'bg-'+this.state.status.type : '')}>
-                    {this.state.status.error}
+                    {this.state.status.message}
                 </div>
             </>
         )
