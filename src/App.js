@@ -35,7 +35,7 @@ class App extends Component{
                 </Router>
         }*/
         return(
-            <Router basename={'archives'}>
+            <Router basename={''}>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/register" element={<Register />} />

@@ -77,7 +77,7 @@ class Register extends Component{
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result)
+                    // console.log(result)
                     if(result.status === 'success'){
                         //TODO: Modal popup or redirect to new page with success message
                         this.setState({

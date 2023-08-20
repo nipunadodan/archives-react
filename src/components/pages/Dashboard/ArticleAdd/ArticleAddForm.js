@@ -50,7 +50,7 @@ class ArticleAddForm extends Component{
             ...abstract,
             ...more
         };
-        console.log(finalState);
+        // console.log(finalState);
 
         const api_base = process.env.REACT_APP_API_BASE;
 
@@ -62,7 +62,7 @@ class ArticleAddForm extends Component{
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
+                    // console.log(result);
                     if(result.status === 'success') {
                         this.setState({
                             submitSuccess:true

@@ -49,8 +49,8 @@ export default class PendingArticles extends Component{
     }
 
     render() {
-        console.log(this.state)
-        console.log(this.props.articles)
+        // console.log(this.state)
+        // console.log(this.props.articles)
         return (
             <div className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-14 mt-6'}>
                 <h2 className={'text-2xl md:text-4xl mt-2 font-black leading-8 md:leading-10'}>Pending Articles</h2>

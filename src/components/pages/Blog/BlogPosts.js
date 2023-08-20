@@ -13,7 +13,7 @@ class BlogPosts extends Component{
     }
     componentDidMount() {
         const blog_api_base = process.env.REACT_APP_BLOG_API_BASE;
-        fetch(blog_api_base+'posts?per_page=3')
+        fetch(blog_api_base+'wp-json/unicorn/v1/blog-posts/standard/4')
             .then(res => res.json())
             .then(
                 (result) => {

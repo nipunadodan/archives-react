@@ -54,7 +54,7 @@ class ArticleEditForm extends Component{
             ...abstract,
             ...more
         };
-        console.log(finalState);
+        // console.log(finalState);
 
         let api_base = process.env.REACT_APP_API_BASE;
 
@@ -66,7 +66,7 @@ class ArticleEditForm extends Component{
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
+                    // console.log(result);
                     if(result.status === 'success') {
                         this.setState({
                             submitSuccess:true
