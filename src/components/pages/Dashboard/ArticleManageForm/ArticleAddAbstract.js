@@ -52,7 +52,7 @@ class ArticleAddAbstract extends Component {
     render() {
         return (
             <div className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-14 mt-6'}>
-                <h3 className={'font-black text-4xl mb-6'}>Abstract</h3>
+                <h3 className={'font-black text-4xl mb-6'}>Abstract<span className={'text-archives text-xl align-top'}>*</span></h3>
                 <JoditEditor
                     editorRef={this.setRef}
                     value={this.state.values.abstract}

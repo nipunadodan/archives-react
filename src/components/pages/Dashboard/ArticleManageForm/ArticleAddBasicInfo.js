@@ -18,9 +18,12 @@ class ArticleAddBasicInfo extends Component{
         coauthors:[
             {coauthor:''}
         ],
+        subject_areas: []
     }
 
     componentDidMount() {
+        this.getMeta();
+
         if(this.props.article){
             const article = this.props.article.data
 
@@ -53,6 +56,22 @@ class ArticleAddBasicInfo extends Component{
                 this.props.parentCallback(this.state.values);
             })
         }
+    }
+
+    getMeta = () => {
+        const api_base = process.env.REACT_APP_API_BASE
+
+        fetch(api_base+'subject-areas', {
+            method: 'get'
+        })
+            .then(res => res.json())
+            .then((result) => {
+                result.data.sort((a, b) => a.subject.localeCompare(b.subject));
+
+                this.setState({
+                    subject_areas : result.data
+                });
+            })
     }
 
     handleChange = (event) =>{
@@ -102,8 +121,8 @@ class ArticleAddBasicInfo extends Component{
         return(
             <div className={'md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-14 mt-6'}>
                 <h3 className={'font-black text-4xl mb-6 mt-6'}>Basic Info</h3> {/*TODO:remove top margin*/}
-                <div className={'md:grid md:grid-cols-4 gap-6 mb-6'}>
-                    <div key={'type'}>
+                <div className={'md:grid md:grid-cols-4 gap-6'}>
+                    <div className={'mb-6'} key={'type'}>
                         <label>Paper Type</label>
                         <select name={'type'} value={this.state.values.type} onChange={this.handleChange}>
                             <option value="0">Select paper type</option>
@@ -112,32 +131,36 @@ class ArticleAddBasicInfo extends Component{
                             <option value="3">Conference Abstract</option>
                         </select>
                     </div>
-                    <div key={'subject_area'}>
+                    <div className={'mb-6'} key={'subject_area'}>
                         <label>Subject Area</label>
                         <select name={'subject_area'} value={this.state.values.subject_area} onChange={this.handleChange}>
                             <option value={0}>Select Subject Area</option>
-                            <option value={1}>Physics</option>
+                            {
+                                this.state.subject_areas.map((subject, index) => (
+                                    <option key={index} value={subject.id}>{subject.subject}</option>
+                                ))
+                            }
                         </select>
                     </div>
-                    <div key={'doi'}>
+                    <div className={'mb-6'} key={'doi'}>
                         <label>Digital Object Identifier (DOI)</label>
                         <input type="text" placeholder={'Digital Object Identifier (DOI)'} name={'doi'} onChange={this.handleChange} value={this.state.values.doi ?? ''} autoComplete={'off'} />
                     </div>
-                    <div key={'license'}>
+                    <div className={'mb-6'} key={'license'}>
                         <label>License</label>
                         <input type="text" placeholder={'License'} name={'license'} onChange={this.handleChange} value={this.state.values.license ?? ''} autoComplete={'off'} />
                     </div>
                 </div>
                 <div key={'title'} className={'mb-6'}>
-                    <label>Title</label>
+                    <label>Title<span className={'text-archives'}>*</span></label>
                     <input type="text" placeholder={'Title'} name={'title'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.title ?? ''} required />
                 </div>
-                <div className={'md:grid md:grid-cols-12 gap-6 mb-6'}>
-                    <div className={'col-span-9'}>
-                        <label>Conference/Journal</label>
+                <div className={'md:grid md:grid-cols-12 gap-6'}>
+                    <div className={'col-span-9 mb-6'}>
+                        <label>Conference/Journal<span className={'text-archives'}>*</span></label>
                         <input type="text" placeholder={'Conference/Journal'} name={'published_at_place'} onChange={this.handleChange} value={this.state.values.published_at_place ?? ''} autoComplete={'off'} required />
                     </div>
-                    <div className={'col-span-3'}>
+                    <div className={'col-span-3 mb-6'}>
                         <label>If applicable, Pages Range</label>
                         <div className={'grid grid-cols-2 gap-6'}>
                             <input type="text" placeholder={'From'} name={'page_from'} onChange={this.handleChange} value={this.state.values.page_from ?? ''} autoComplete={'off'} />
@@ -145,12 +168,12 @@ class ArticleAddBasicInfo extends Component{
                         </div>
                     </div>
                 </div>
-                <div className={'md:grid md:grid-cols-2 gap-6 mb-6'}>
-                    <div key={'author'}>
-                        <label>First Author</label>
+                <div className={'md:grid md:grid-cols-2 gap-6'}>
+                    <div className={'mb-6'} key={'author'}>
+                        <label>First Author<span className={'text-archives'}>*</span></label>
                         <input type="text" placeholder={'First Author'} name={'author'} onChange={this.handleChange} autoComplete={'off'} value={this.state.values.author ?? ''} required />
                     </div>
-                    <div key={'authors-1'}>
+                    <div className={'mb-6'} key={'authors-1'}>
                         <label>Co-authors</label>
                         {this.state.coauthors.map((x,i) => {
                             return (

@@ -4,9 +4,12 @@ import ArticleAddAbstract from "../ArticleManageForm/ArticleAddAbstract";
 import ArticleAddMoreInfo from "../ArticleManageForm/ArticleAddMoreInfo";
 import ArticleAddSubmit from "../ArticleManageForm/ArticleAddSubmit";
 import {withRouter} from "../../../../Helpers/Helpers";
+import ArticleAddSuccess from "../ArticleManageForm/ArticleAddSucess";
 
 class ArticleEditForm extends Component{
-    state = {
+    navigate = this.props.navigate;
+
+    RESET = {
         basics : [],
         abstract : null,
         more : [],
@@ -15,8 +18,11 @@ class ArticleEditForm extends Component{
         article:false,
         subject_areas:[],
         submitSuccess:false,
-        error : null
+        error : null,
+        result: {}
     }
+
+    state = this.RESET;
 
     handleBasicData = (data) =>{
         this.setState({
@@ -69,13 +75,14 @@ class ArticleEditForm extends Component{
                     // console.log(result);
                     if(result.status === 'success') {
                         this.setState({
-                            submitSuccess:true
+                            submitSuccess:true,
+                            result: result
                         })
                     }
                 },
                 (error) => {
                     this.setState({
-                        submitSuccess: true,
+                        submitSuccess: false,
                         error
                     })
                 }
@@ -104,7 +111,7 @@ class ArticleEditForm extends Component{
                 (result) =>{
                     this.setState({
                         isLoaded: true,
-                        article:result
+                        article: result
                     })
                     if(result.status !== 'success'){
                         this.setState({
@@ -121,6 +128,17 @@ class ArticleEditForm extends Component{
                     })
                 }
             )
+    }
+
+    addNew = () => {
+        this.setState(this.RESET);
+        this.navigate('/add-new');
+    }
+
+    editThis = () => {
+        this.setState({
+            submitSuccess: false
+        })
     }
 
     render() {
@@ -140,12 +158,18 @@ class ArticleEditForm extends Component{
             )
         }
         return(
-            <form className={'form'} name={'article-add'} method={'post'} onSubmit={this.handleSubmit}>
-                <ArticleAddBasicInfo article={article} parentCallback={this.handleBasicData} />
-                <ArticleAddAbstract article={article} parentCallback={this.handleAbstractData} />
-                <ArticleAddMoreInfo article={article} parentCallback={this.handleMoreData} />
-                <ArticleAddSubmit />
-            </form>
+            <>{
+                this.state.submitSuccess ?
+                    <>
+                        <ArticleAddSuccess article={this.state.result} addNew={this.addNew} editThis={this.editThis} />
+                    </> :
+                    <form className={'form'} name={'article-add'} method={'post'} onSubmit={this.handleSubmit}>
+                        <ArticleAddBasicInfo article={article} parentCallback={this.handleBasicData}/>
+                        <ArticleAddAbstract article={article} parentCallback={this.handleAbstractData}/>
+                        <ArticleAddMoreInfo article={article} parentCallback={this.handleMoreData}/>
+                        <ArticleAddSubmit/>
+                    </form>
+            }</>
         )
     }
 }

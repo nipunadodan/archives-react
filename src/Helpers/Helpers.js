@@ -1,4 +1,4 @@
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 export function getDateStr(date){
     let dateObj = new Date(date);
@@ -27,7 +27,9 @@ export function withRouter( Child ) {
     return ( props ) => {
         const location = useLocation();
         const params = useParams();
-        return <Child { ...props } params={params} location={ location } />;
+        const navigate = useNavigate();
+
+        return <Child { ...props } params={params} location={ location } navigate={navigate} />;
     }
 }
 

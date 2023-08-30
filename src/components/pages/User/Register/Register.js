@@ -27,11 +27,14 @@ class Register extends Component{
     }
     handleChange = (event) => {
         const {name, value} = event.target
+
         this.setState({
             [name]:value
         })
+
         if(name === 'username' || name === 'email'){
             const api_base = process.env.REACT_APP_API_BASE
+
             fetch(api_base+'register-validation',{
                 method:'post',
                 body:new URLSearchParams({
@@ -78,23 +81,12 @@ class Register extends Component{
             .then(
                 (result) => {
                     // console.log(result)
-                    if(result.status === 'success'){
-                        //TODO: Modal popup or redirect to new page with success message
-                        this.setState({
-                            status:{
-                                type:result.status,
-                                message:result.message
-                            }
-                        })
-
-                    }else{
-                        this.setState({
-                            status:{
-                                type: 'danger',
-                                message: result.message,
-                            }
-                        })
-                    }
+                    this.setState({
+                        status:{
+                            type:result.status,
+                            message:result.message
+                        }
+                    })
                 }
             )
             .catch((error) => {
@@ -196,19 +188,21 @@ class Register extends Component{
                                 <label className={'text-sm mb-1 inline-block'}>Email</label>
                                 <input type="email"
                                        className={'p-2 rounded-lg w-full border-2 focus:border-archives hover:border-gray-400 outline-none'}
-                                       placeholder={'Email'} name={'email'} onChange={this.handleChange}
+                                       placeholder={'Email'} name={'email'} onBlur={this.handleChange}
                                        autoComplete={'off'}
                                        required={true}
                                 />
+                                <div className={'text-red-600 text-sm'} id={'err-email'}>{this.state.validation.email.status !== 'success' ? this.state.validation.email.message : ''}</div>
                             </div>
                             <div>
                                 <label className={'text-sm mb-1 inline-block'}>Username</label>
                                 <input type="text"
                                        className={'p-2 rounded-lg w-full border-2 focus:border-archives hover:border-gray-400 outline-none'}
-                                       placeholder={'Username'} name={'username'} onChange={this.handleChange}
+                                       placeholder={'Username'} name={'username'} onBlur={this.handleChange}
                                        autoComplete={'off'}
                                        required={true}
                                 />
+                                <div className={'text-red-600 text-sm'} id={'err-email'}>{this.state.validation.username.status !== 'success' ? this.state.validation.username.message : ''}</div>
                             </div>
                             <div>
                                 <label className={'text-sm mb-1 inline-block'}>Password</label>
@@ -218,6 +212,7 @@ class Register extends Component{
                                        name={'password'}
                                        onChange={this.handleChange}
                                        required={true}
+                                       autoComplete={'new-password'}
                                 />
                             </div>
                         </div>
@@ -225,7 +220,7 @@ class Register extends Component{
                         <div className={'flex items-center mt-6'}>
                             <div className={'flex-grow text-right px-6 '+(this.state.status.type !== '' ? 'text-'+this.state.status.type : '')}>
                                     {this.state.status.message}
-                                <div className={'text-success text-danger'}/>
+                                <div className={'text-success text-danger'} />
                             </div>
                             <div className={''}>
                                 <Button type={'submit'} outline={false} text={'Register'} size={'sm'} className={'px-6'}/>

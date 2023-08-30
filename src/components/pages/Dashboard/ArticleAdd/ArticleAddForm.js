@@ -3,16 +3,20 @@ import ArticleAddBasicInfo from "../ArticleManageForm/ArticleAddBasicInfo";
 import ArticleAddAbstract from "../ArticleManageForm/ArticleAddAbstract";
 import ArticleAddMoreInfo from "../ArticleManageForm/ArticleAddMoreInfo";
 import ArticleAddSubmit from "../ArticleManageForm/ArticleAddSubmit";
+import ArticleAddSuccess from "../ArticleManageForm/ArticleAddSucess";
 
 class ArticleAddForm extends Component{
-    state = {
+    RESET = {
         basics : [],
         abstract : null,
         more : [],
-        abstractObject:null,
-        submitSuccess:false,
-        error : null
+        abstractObject: null,
+        submitSuccess: false,
+        error : null,
+        result: {}
     }
+
+    state = this.RESET
 
     handleBasicData = (data) =>{
         this.setState({
@@ -65,13 +69,14 @@ class ArticleAddForm extends Component{
                     // console.log(result);
                     if(result.status === 'success') {
                         this.setState({
-                            submitSuccess:true
+                            submitSuccess:true,
+                            result: result
                         })
                     }
                 },
                 (error) => {
                     this.setState({
-                        submitSuccess: true,
+                        submitSuccess: false,
                         error
                     })
                 }
@@ -80,18 +85,36 @@ class ArticleAddForm extends Component{
         return false;
     }
 
+    addNew = () => {
+        this.setState(this.RESET);
+    }
+
+    editThis = () => {
+        this.setState({
+            submitSuccess: false
+        })
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0)
     }
 
     render() {
         return(
-            <form className={'form'} name={'article-add'} method={'post'} onSubmit={this.handleSubmit}>
-                <ArticleAddBasicInfo parentCallback={this.handleBasicData} />
-                <ArticleAddAbstract parentCallback={this.handleAbstractData} />
-                <ArticleAddMoreInfo parentCallback={this.handleMoreData} />
-                <ArticleAddSubmit />
-            </form>
+            <>
+                {this.state.submitSuccess ?
+                    <>
+                        <ArticleAddSuccess article={this.state.result} addNew={this.addNew} editThis={this.editThis} />
+                    </> :
+                    <form className={'form'} name={'article-add'} method={'post'} onSubmit={this.handleSubmit}>
+                        <ArticleAddBasicInfo parentCallback={this.handleBasicData} />
+                        <ArticleAddAbstract parentCallback={this.handleAbstractData} />
+                        <ArticleAddMoreInfo parentCallback={this.handleMoreData} />
+                        <ArticleAddSubmit />
+                    </form>
+
+                }
+            </>
         )
     }
 }

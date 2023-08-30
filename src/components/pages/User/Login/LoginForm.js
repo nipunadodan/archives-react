@@ -91,7 +91,7 @@ class LoginForm extends Component{
                             <label className={'text-sm mb-1 inline-block'}>Password</label>
                             <input type="password"
                                    className={'p-2 rounded-lg w-full border-2 focus:border-archives hover:border-gray-400 outline-none'}
-                                   placeholder={'Password'} name={'password'} onChange={this.handleChange} />
+                                   placeholder={'Password'} name={'password'} onChange={this.handleChange} autoComplete={'current-password'} />
                         </div>
                         <div className={'flex justify-end mt-6'}>
                             <Button type={'submit'} outline={false} text={'Login'} size={'sm'} className={'px-6'} />

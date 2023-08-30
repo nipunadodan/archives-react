@@ -7,7 +7,7 @@ import Footer from "../../../template/footer/Footer";
 class ArticleAdd extends Component{
     render() {
         return(
-            <div key={'add-new-container'} className={'container mx-auto'}>
+            <div key={'add-new-container'} className={'container mx-auto relative z-0'}>
                 <Header nav={true} />
                 <ArticleAddIntructions />
                 <ArticleAddForm />

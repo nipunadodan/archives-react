@@ -50,6 +50,7 @@ class Article extends Component{
 
     render() {
         const {error, isLoaded, article} = this.state;
+
         return (
             <div key={'articleContainer'} className={'container mx-auto'}>
                 <Header nav={true} />

@@ -21,8 +21,8 @@ class Header extends Component{
         //console.log(this.props)
 
         return (
-            <header className="md:flex items-center md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-8 mt-6">
-                <div className={'flex-grow flex justify-center'+ (this.props.nav ? 'md:justify-start' : '')}>
+            <header className="md:flex items-center justify-between md:rounded-2xl bg-white px-8 md:px-16 py-8 md:py-8 mt-6">
+                <div className={'flex justify-center'}>
                     <Link to={'/'}>
                         {
                             location.pathname === '/' ?
@@ -39,10 +39,10 @@ class Header extends Component{
                 </div>
 
                 {(this.props.nav) &&
-                    <nav className={'md:flex flex-row items-center'}>
+                    <nav className={'flex flex-row items-center justify-center mt-4 md:mt-0'}>
                         {!this.state.isLoggedIn ?
                             <Link to={'/login'}>Login</Link> :
-                            <div className={'flex flex-col items-center md:items-end mt-6 md:mt-0'}>
+                            <div className={'flex flex-col items-center md:items-end '}>
                                 <Link className={'md:mx-3 text-lg font-bold md:text-right'}
                                       to={'/profile'}>{this.state.user.first_name} {this.state.user.last_name}</Link>
                                 <div className={'text-sm flex text-gray-500'}>
